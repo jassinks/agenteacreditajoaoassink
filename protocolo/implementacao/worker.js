@@ -20,7 +20,7 @@ async function history(env,id){return (await env.DB.prepare('SELECT status,publi
 export default {
  async fetch(request,env){
   const pathname=new URL(request.url).pathname;
-  if(request.method==='OPTIONS'){if(request.headers.get('Origin')!==env.SITE_ORIGIN)return new Response(null,{status:403});return json({},204,env,request);}
+  if(request.method==='OPTIONS'){if(request.headers.get('Origin')!==env.SITE_ORIGIN)return new Response(null,{status:403});const headers=new Headers({'Access-Control-Allow-Origin':env.SITE_ORIGIN,'Access-Control-Allow-Methods':'POST, OPTIONS','Access-Control-Allow-Headers':'Content-Type, Authorization','Cache-Control':'no-store','Vary':'Origin'});return new Response(null,{status:204,headers});}
   if(pathname==='/api/health' && request.method==='GET')return json({service:'protocolos',status:'online'},200,env,request);
   if(request.method!=='POST'||!pathname.startsWith('/api/'))return json({error:'Rota não encontrada'},404,env,request);
   if(!env.DB||!env.ADMIN_TOKEN||!env.INGEST_TOKEN||!env.SITE_ORIGIN)return json({error:'Serviço ainda não configurado'},503,env,request);
