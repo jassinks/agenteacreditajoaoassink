@@ -87,6 +87,40 @@ export default {
     let b;
     try{b=await parse(req);}catch(e){return json({error:'Dados inválidos ou muito grandes'},400,env,req);}
     try{
+      // Cadastro anônimo a partir do próprio site.
+      // Turnstile Siteverify é obrigatório; o Worker não armazena e-mail ou nome.
+      if(path==='/api/public/create'){
+        if(!env.TURNSTILE_SECRET) return json({error:'Cadastro anônimo ainda não configurado'},503,env,req);
+        const title=clean(b.title,180),details=clean(b.details,3500),category=clean(b.category,80);
+        const challenge=clean(b.turnstile_token,2048);
+        if(title.length<5||details.length<15||!challenge){
+          return json({error:'Informe assunto, descrição e verificação de segurança'},400,env,req);
+        }
+        let validated;
+        try {
+          const verify=await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify',{
+            method:'POST',
+            headers:{'Content-Type':'application/x-www-form-urlencoded'},
+            body:new URLSearchParams({secret:env.TURNSTILE_SECRET,response:challenge})
+          });
+          validated=await verify.json();
+        }catch(e){
+          return json({error:'Não foi possível validar o envio. Tente novamente.'},503,env,req);
+        }
+        const hostname=new URL(env.SITE_ORIGIN).hostname;
+        if(!validated?.success||validated.hostname!==hostname||validated.action!=='anon_sugestao'){
+          return json({error:'Verificação de segurança não aprovada. Atualize a página e tente novamente.'},403,env,req);
+        }
+        const formId='site-'+crypto.randomUUID();
+        const protocol='JA-'+new Date().getUTCFullYear()+'-'+secureToken(9).toUpperCase();
+        const accessKey=secureToken(32);
+        await env.DB.batch([
+          env.DB.prepare("INSERT INTO submissions (form_id,protocol,access_hash,email,title,details,category,status,next_step,created_at,updated_at) VALUES (?,?,?,NULL,?,?,?,'Recebida','A equipe fará a triagem inicial.',datetime('now'),datetime('now'))")
+            .bind(formId,protocol,await keyHash(protocol,accessKey,env.ACCESS_PEPPER),title,details,category),
+          env.DB.prepare("INSERT INTO updates (submission_id,status,public_note,next_step,created_at,notified_at) SELECT id,'Recebida','Sua sugestão anônima foi registrada e aguarda triagem.','A equipe fará a triagem inicial.',datetime('now'),datetime('now') FROM submissions WHERE protocol=?").bind(protocol)
+        ]);
+        return json({protocol,access_key:accessKey,anonymous:true,save_key_notice:'Guarde esta chave. Sem e-mail cadastrado não será possível recuperá-la.'},201,env,req);
+      }
       // Chamado apenas pelo Google Apps Script, autenticado por INGEST_TOKEN.
       if(path==='/api/intake'){
         if(!authorized(req,env.INGEST_TOKEN))return json({error:'Não autorizado'},401,env,req);
@@ -132,7 +166,7 @@ export default {
       if(path.startsWith('/api/notifications/')){
         if(!authorized(req,env.INGEST_TOKEN))return json({error:'Não autorizado'},401,env,req);
         if(path==='/api/notifications/pending'){
-          const list=await env.DB.prepare("SELECT u.id AS update_id, s.protocol, s.email, u.status, u.created_at AS date FROM updates u JOIN submissions s ON s.id=u.submission_id WHERE u.notified_at IS NULL ORDER BY u.id ASC LIMIT ?").bind(MAX_NOTIFICATIONS).all();
+          const list=await env.DB.prepare("SELECT u.id AS update_id, s.protocol, s.email, u.status, u.created_at AS date FROM updates u JOIN submissions s ON s.id=u.submission_id WHERE u.notified_at IS NULL AND s.email IS NOT NULL AND s.email <> '' ORDER BY u.id ASC LIMIT ?").bind(MAX_NOTIFICATIONS).all();
           return json({items:list.results||[]},200,env,req);
         }
         if(path==='/api/notifications/ack'){
