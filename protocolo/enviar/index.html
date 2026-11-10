@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0000ff">
+<meta name="description" content="Envie uma sugestão sem informar seu nome ou e-mail e acompanhe com um protocolo e chave individual.">
+<title>Envie uma ideia | João Assink</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@400;500;600;700;800&display=swap');
+:root{--blue:#0000ff;--green:#00c13e;--text:#16171c;--muted:#505563;--border:#d8dced;--bg:#f8f9ff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{font:16px/1.65 'Figtree',Arial,sans-serif;color:var(--text);margin:0;background:var(--bg)}a{color:var(--blue)}button,input,select,textarea{font:inherit}button{cursor:pointer}input:focus-visible,textarea:focus-visible,select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #008b32;outline-offset:3px}h1,h2,h3{font:400 1em/1.03 'Bebas Neue',Impact,sans-serif;color:var(--blue);margin:0}h1{font-size:clamp(52px,8vw,83px)}h2{font-size:38px}h3{font-size:29px}
+header{background:white;border-bottom:1px solid var(--border)}.top{max-width:1100px;margin:auto;min-height:79px;padding:12px 22px;display:flex;justify-content:space-between;align-items:center;gap:18px}.brand{font:34px/1 'Bebas Neue',Impact,sans-serif;text-decoration:none}.back{font-weight:800;font-size:14px;text-align:right}
+.wrap{max-width:1100px;padding:45px 22px 80px;margin:auto}.tag{font-size:13px;font-weight:800;letter-spacing:.08em;color:var(--blue);text-transform:uppercase}.lead{font-size:19px;max-width:780px;margin:14px 0 24px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:25px 0}.choice,.panel{background:#fff;border:1px solid var(--border);border-radius:11px;padding:25px}.choice h2{margin-bottom:10px}.choice p{margin:0 0 14px}.choice a{font-weight:800;text-underline-offset:4px}
+.panel{max-width:850px;padding:30px}.note{border-left:4px solid var(--blue);padding:13px 15px;background:#f3f5ff;margin:18px 0}.warning{border-left:4px solid #936200;background:#fff9ed}.muted{color:var(--muted);font-size:14px}.label{font-size:14px;font-weight:800;display:block;margin:18px 0 6px}.field{width:100%;min-height:49px;padding:11px 14px;border-radius:6px;border:1px solid #9299af;background:white}.field:focus{border-color:var(--blue)}textarea.field{min-height:140px;resize:vertical}button.primary{border:0;background:var(--blue);color:#fff;border-radius:6px;padding:14px 22px;font-weight:800;min-height:51px}button.primary:disabled{background:#656c8a;cursor:not-allowed}button.secondary{border:1px solid var(--blue);color:var(--blue);background:#fff;padding:10px 14px;border-radius:6px;font-weight:800}.check{display:flex;align-items:flex-start;gap:10px;margin:20px 0}.check input{margin-top:7px;width:20px;height:20px;flex-shrink:0}.messages{font-weight:700;min-height:23px;margin:14px 0;color:#9a1c20}.secret{border:2px solid #d1d9ff;border-radius:8px;background:#f7f8ff;padding:15px 17px;margin:16px 0}.secret strong{font-size:14px;display:block;color:#424968;margin-bottom:6px}.secret code{font-family:ui-monospace,Consolas,monospace;overflow-wrap:anywhere;font-size:17px}.actions{display:flex;flex-wrap:wrap;gap:10px}.actions button{margin:0}.done{margin-top:22px;color:#124923;font-weight:800}.tiny{font-size:12px;color:#666b78}.footer{padding:28px 22px;background:#fff;border-top:1px solid var(--border);font-size:13px;color:#464a56}.footer>div{max-width:1100px;margin:auto}
+[hidden]{display:none!important}@media(max-width:750px){.choices{grid-template-columns:1fr}.wrap{padding-top:28px}.panel{padding:19px}.top{padding:12px 16px}.brand{font-size:27px}.choice{padding:20px}}@media print{header,.choices,.actions,.footer,#create-panel{display:none!important}.wrap{padding:0}#result-panel{border:1px solid #ddd}.secret{break-inside:avoid}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<script src="../config.js"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+</head><body>
+<a href="#conteudo" style="position:absolute;left:-9999px;top:0;background:white;padding:10px;z-index:10" onfocus="this.style.left='10px'" onblur="this.style.left='-9999px'">Pular para conteúdo</a>
+<header><div class="top"><a class="brand" href="../../">A GENTE ACREDITA</a><a class="back" href="../">← Consultar protocolos</a></div></header>
+<main class="wrap" id="conteudo"><span class="tag">João Assink · participação cidadã</span><h1>SUA VOZ TEM VEZ.</h1><p class="lead">Escolha como deseja apresentar uma ideia. Você não é obrigado a informar sua identidade para participar, mas o envio anônimo não permite receber notificações por e-mail.</p>
+<div class="choices"><section class="choice"><h2>Quero receber por e-mail</h2><p>Use o Google Forms para enviar sua sugestão com um endereço de e-mail para receber o protocolo e a chave de acompanhamento após a integração.</p><a id="google-link" href="https://docs.google.com/forms/d/e/1FAIpQLSeutZdSqVwU8gfnqKWFVvTNx9V-o_G3PCDq1JSM5NU8u4s5-g/viewform" target="_blank" rel="noopener noreferrer">Abrir Google Forms</a><p class="muted">O e-mail informado identifica um meio de contato. O envio do protocolo só estará automático quando a integração estiver ativada.</p></section>
+<section class="choice"><h2>Prefiro não me identificar</h2><p>Envie diretamente neste site, sem preencher nome nem e-mail. Ao concluir, serão mostrados o protocolo e a chave privada, que precisarão ser guardados.</p><a href="#form-titulo">Ir ao formulário sem identificação</a><p class="muted">Não será possível recuperar a chave ou enviar notificações por e-mail.</p></section></div>
+<section class="panel" id="create-panel" aria-labelledby="form-titulo"><h2 id="form-titulo">Enviar sugestão sem identificação</h2><div class="note">Este canal é uma iniciativa pessoal e independente, não um serviço de denúncia, atendimento emergencial, Câmara ou Prefeitura. Os conteúdos serão analisados conforme a finalidade de participação cidadã.</div>
+<div id="not-ready" class="note warning" role="status" hidden><strong>Envio ainda não disponível.</strong> A interface está pronta, mas depende da ativação do servidor privado e do mecanismo de proteção contra envios automáticos. Não é possível registrar sugestões reais enquanto estiver em configuração.</div>
+<form id="anonymous-form" autocomplete="off">
+<label class="label" for="category">Tema</label><select class="field" id="category" required><option value="">Selecione um tema</option><option>Acessibilidade e inclusão</option><option>Educação</option><option>Transporte</option><option>Saúde</option><option>Comunidade e bairros</option><option>Outro assunto coletivo</option></select>
+<label class="label" for="title">Assunto da sugestão</label><input class="field" id="title" maxlength="180" minlength="5" required placeholder="Resuma sua ideia em uma frase">
+<label class="label" for="details">O que você gostaria de sugerir?</label><textarea class="field" id="details" maxlength="3500" minlength="15" required placeholder="Explique sua ideia. Evite incluir nomes, endereços, telefones e informações de saúde de outras pessoas."></textarea><p class="muted">Não informe nomes, dados sensíveis ou detalhes que possam identificar você ou terceiros se desejar preservar o anonimato.</p>
+<div id="challenge" aria-label="Verificação de segurança"></div>
+<label class="check" for="aware"><input id="aware" type="checkbox" required><span>Entendi que o código e a chave serão exibidos apenas uma vez, que não terei recuperação por e-mail e que este não é um canal oficial de serviço público.</span></label>
+<button type="submit" class="primary" id="send" disabled>Enviar e gerar meu protocolo</button>
+<div class="messages" id="feedback" role="status" aria-live="polite"></div>
+</form></section>
+<section class="panel" id="result-panel" hidden aria-labelledby="result-title"><h2 id="result-title">Sua sugestão foi registrada</h2><p id="success-text">Guarde as duas informações abaixo antes de fechar esta página.</p>
+<div class="secret"><strong>Seu número de protocolo</strong><code id="protocol"></code></div>
+<div class="secret"><strong>Sua chave individual de acesso (não compartilhar)</strong><code id="access-key"></code></div>
+<div class="actions"><button class="secondary" type="button" id="copy-both">Copiar protocolo e chave</button><button class="secondary" type="button" id="print">Imprimir ou salvar como PDF</button><a class="primary" id="go-query" href="../" style="display:inline-flex;align-items:center;text-decoration:none">Acompanhar minha sugestão</a></div>
+<p class="done">Registro criado. Só quem tiver ambos os códigos poderá consultar o andamento.</p><p class="muted">O formulário não pede seu nome ou e-mail. O serviço de hospedagem e segurança pode processar dados técnicos da conexão. Isso não garante anonimato absoluto se sua descrição revelar sua identidade.</p>
+</section>
+</main><footer class="footer"><div>Página pessoal de João Assink. Não é canal oficial de atendimento público nem serviço emergencial. Dados sensíveis e relatos de risco imediato devem ser encaminhados aos serviços e autoridades competentes.</div></footer>
+<script>
+'use strict';
+const cfg=window.PORTAL_CONFIG||{},apiBase=(cfg.apiBase||'').replace(/\/$/,'');
+const siteKey=cfg.turnstileSiteKey||'';
+const get=id=>document.getElementById(id);
+const form=get('anonymous-form');
+let turnstileToken='',turnstileWidget;
+if(cfg.googleFormUrl)get('google-link').href=cfg.googleFormUrl;
+const ready=Boolean(apiBase&&siteKey);
+if(!ready){get('not-ready').hidden=false;get('send').disabled=true;}
+window.addEventListener('load',()=>{
+  if(!ready)return;
+  if(typeof window.turnstile==='undefined'){get('feedback').textContent='A verificação de segurança não carregou. Atualize a página.';return;}
+  turnstileWidget=window.turnstile.render('#challenge',{
+    sitekey:siteKey,action:'anon_sugestao',
+    callback:token=>{turnstileToken=token;get('send').disabled=false;},
+    'expired-callback':()=>{turnstileToken='';get('send').disabled=true;},
+    'error-callback':()=>{turnstileToken='';get('send').disabled=true;get('feedback').textContent='Verificação indisponível. Recarregue a página.';}
+  });
+});
+form.addEventListener('submit',async ev=>{
+ ev.preventDefault();
+ if(!ready||!turnstileToken||!form.reportValidity()){get('feedback').textContent='Confira os campos e faça a verificação de segurança.';return;}
+ get('send').disabled=true;get('feedback').textContent='Registrando sua sugestão…';
+ try{
+  const response=await fetch(apiBase+'/api/public/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:get('title').value.trim(),details:get('details').value.trim(),category:get('category').value,turnstile_token:turnstileToken}),cache:'no-store',referrerPolicy:'no-referrer'});
+  const data=await response.json();
+  if(!response.ok||!data.protocol||!data.access_key)throw Error(data.error||'Não foi possível registrar.');
+  get('protocol').textContent=data.protocol;get('access-key').textContent=data.access_key;
+  get('create-panel').hidden=true;get('result-panel').hidden=false;get('result-title').focus?.();get('result-panel').scrollIntoView({block:'start'});
+ }catch(err){
+  get('feedback').textContent=err.message||'Falha de comunicação. Tente novamente.';
+  turnstileToken='';if(window.turnstile&&turnstileWidget!==undefined)window.turnstile.reset(turnstileWidget);
+ }
+});
+get('copy-both').addEventListener('click',async()=>{
+ const text='Protocolo: '+get('protocol').textContent+'\nChave de acesso: '+get('access-key').textContent+'\nAcompanhar: https://jassinks.github.io/agenteacreditajoaoassink/protocolo/';
+ try{await navigator.clipboard.writeText(text);get('success-text').textContent='Copiado! Guarde essas informações em local seguro.';}catch(e){get('success-text').textContent='O navegador impediu a cópia. Selecione os códigos e copie manualmente ou imprima a página.';}
+});
+get('print').addEventListener('click',()=>window.print());
+</script></body></html>
