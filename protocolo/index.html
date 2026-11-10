@@ -31,6 +31,7 @@ label{font-size:14px;font-weight:800;display:block;margin:17px 0 6px}.field{widt
 <div class="notice" role="note"><span aria-hidden="true">ⓘ</span><div><strong>Protótipo público para testes — sem recebimento de sugestões reais.</strong>Os casos, códigos e alterações desta página são fictícios. A demonstração não possui sigilo real. Não digite dados pessoais, denúncias nem informações de saúde.</div></div></section>
 <section aria-label="Etapas do atendimento" class="steps"><div class="step"><b>01</b><span>Envio pelo Google Forms</span></div><div class="step"><b>02</b><span>Protocolo por e-mail</span></div><div class="step"><b>03</b><span>Análise e andamento</span></div><div class="step"><b>04</b><span>Resposta e conclusão</span></div></section>
 <div class="layout"><div class="surface">
+<div class="demo-examples" style="margin:-5px 0 24px;background:#f5f7ff"><h3>Deseja enviar uma sugestão?</h3><p class="tiny">Você pode escolher entre o envio sem identificação, com protocolo mostrado diretamente na tela, ou o Google Forms para receber o protocolo por e-mail após a integração.</p><div class="button-row"><a class="secondary" style="text-decoration:none;display:inline-block" href="enviar/">Enviar sem identificação</a><a class="secondary" style="text-decoration:none;display:inline-block" href="https://docs.google.com/forms/d/e/1FAIpQLSeutZdSqVwU8gfnqKWFVvTNx9V-o_G3PCDq1JSM5NU8u4s5-g/viewform" target="_blank" rel="noopener noreferrer">Abrir Google Forms</a></div></div>
 <div class="tabbar" role="tablist" aria-label="Escolha a área"><button class="tab" type="button" role="tab" id="tab-pessoa" aria-selected="true" aria-controls="area-pessoa">Sou cidadão</button><button class="tab" type="button" role="tab" id="tab-equipe" aria-selected="false" aria-controls="area-equipe">Painel da equipe (simulação)</button></div>
 <section id="area-pessoa" role="tabpanel" aria-labelledby="tab-pessoa">
 <h2>Consulte sua sugestão</h2><p>Na versão definitiva, cada envio terá um protocolo e uma chave secreta distintos. Nenhum deles ficará publicado nesta página.</p>
@@ -49,11 +50,12 @@ label{font-size:14px;font-weight:800;display:block;margin:17px 0 6px}.field{widt
 </div>
 </main>
 <footer class="footer"><div class="wrap"><p>Página pessoal e independente de João Assink. Este ambiente é uma demonstração de interface e não recebe nem processa solicitações verdadeiras. Nenhum conteúdo desta página representa protocolo de órgão público.</p></div></footer>
+<script src="config.js"></script>
 <script>
 'use strict';
 // O protótipo usa EXCLUSIVAMENTE casos fictícios. Jamais adicionar dados reais aqui.
 // A API privada deverá ser configurada antes de qualquer atendimento real.
-const API_BASE = '';
+const API_BASE = window.PORTAL_CONFIG?.apiBase || '';
 const mocks = {
  'JA-2026-0001': { access:'ACESSO-DEMO-01',title:'Acessibilidade em espaços comunitários',status:'Em análise',date:'10/11/2026',next:'Identificar possibilidades de encaminhamento e informar a resposta ao cidadão.',events:[{status:'Recebida',date:'10/11/2026',note:'Sugestão registrada para demonstração.'},{status:'Em triagem',date:'10/11/2026',note:'Tema identificado como acessibilidade.'},{status:'Em análise',date:'10/11/2026',note:'Análise fictícia do pedido iniciada.'}]},
  'JA-2026-0002': { access:'ACESSO-DEMO-02',title:'Transporte para atividades educacionais',status:'Encaminhada',date:'10/11/2026',next:'Aguardar informações para elaborar uma devolutiva clara.',events:[{status:'Recebida',date:'10/11/2026',note:'Sugestão registrada para demonstração.'},{status:'Em triagem',date:'10/11/2026',note:'Assunto classificado como transporte.'},{status:'Encaminhada',date:'10/11/2026',note:'Encaminhamento fictício cadastrado no protótipo.'}]}
