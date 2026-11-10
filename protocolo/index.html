@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0000ff">
+<meta name="description" content="Demonstração do acompanhamento de sugestões por protocolo no site pessoal de João Assink.">
+<title>Acompanhar protocolo | João Assink</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@400;500;600;700;800&display=swap');
+:root{--azul:#0000ff;--verde:#00c13e;--tinta:#161616;--cinza:#535765;--borda:#dadde7;--fundo:#f7f8fd;--claro:#e8eaff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--tinta);font:16px/1.62 'Figtree',Arial,sans-serif;background:#fff}a{color:inherit}button,input,select,textarea{font:inherit}button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #007d2b;outline-offset:3px}
+.skip{position:absolute;left:8px;top:-90px;background:white;z-index:100;padding:10px}.skip:focus{top:8px}
+.header{border-bottom:1px solid var(--borda);background:white}.header-inner{max-width:1120px;min-height:77px;display:flex;align-items:center;justify-content:space-between;gap:14px;margin:auto;padding:10px 22px}.mark{font:34px/1 'Bebas Neue',Impact,sans-serif;color:var(--azul);text-decoration:none}.back{font-weight:700;text-decoration:underline;text-underline-offset:4px;font-size:14px}
+main{background:linear-gradient(180deg,#f7f8ff,#fff 380px);min-height:85vh}.wrap{max-width:1120px;margin:auto;padding:0 22px}.hero{padding:66px 0 36px}.kicker{font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--azul)}h1,h2{font-family:'Bebas Neue',Impact,sans-serif;line-height:1.02;font-weight:400;margin:0;color:var(--azul)}h1{font-size:clamp(52px,8vw,93px);max-width:850px;margin:12px 0 20px}h2{font-size:39px}.hero p{max-width:760px;font-size:19px;margin:0 0 20px}.notice{display:flex;gap:11px;align-items:flex-start;padding:16px 18px;background:#fff9ec;border-left:5px solid #986000;border-radius:5px;margin:20px 0 0;max-width:920px;font-size:14px}.notice strong{display:block}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0 34px}.step{background:#fff;border:1px solid var(--borda);padding:15px 16px;border-radius:10px}.step b{font:30px/1 'Bebas Neue',Impact,sans-serif;color:var(--azul);display:block;margin-bottom:5px}.step span{font-weight:700}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:22px;align-items:start;padding-bottom:80px}.surface{background:#fff;border:1px solid var(--borda);border-radius:13px;padding:29px;box-shadow:0 8px 30px rgba(15,18,70,.045)}.surface p{color:var(--cinza);margin:8px 0 19px}.tabbar{display:flex;gap:8px;border-bottom:1px solid var(--borda);margin:-3px 0 25px;padding-bottom:15px;flex-wrap:wrap}.tab{border:1px solid var(--borda);border-radius:5px;padding:10px 15px;background:#fff;font-weight:800}.tab[aria-selected="true"]{background:var(--azul);border-color:var(--azul);color:#fff}
+label{font-size:14px;font-weight:800;display:block;margin:17px 0 6px}.field{width:100%;padding:12px 13px;border:1px solid #9fa6ba;border-radius:6px;background:#fff;color:var(--tinta);min-height:49px}.field:focus{border-color:var(--azul)}.primary{width:100%;margin-top:22px;border:0;background:var(--azul);color:#fff;font-weight:800;min-height:51px;padding:12px 17px;border-radius:6px}.primary:hover{background:#0000bd}.secondary{border:1px solid var(--azul);background:white;color:var(--azul);font-size:14px;font-weight:800;padding:9px 12px;border-radius:6px}.tiny{font-size:13px!important}.demo-examples{background:#f6f8ff;border:1px solid #dee2ff;padding:14px 16px;border-radius:8px;margin:20px 0 0}.demo-examples h3{font-size:15px;margin:0 0 9px}.demo-examples .button-row{display:flex;gap:10px;flex-wrap:wrap}.feedback{margin-top:15px;font-weight:700;min-height:24px}.feedback.error{color:#9c1e23}.feedback.ok{color:#17633b}
+.aside h2{font-size:28px}.aside p{font-size:15px}.aside ul{font-size:14px;color:var(--cinza);padding-left:20px}.aside li{margin-bottom:8px}
+.result{margin-top:28px;border-top:2px solid var(--borda);padding-top:22px}.result[hidden],[hidden]{display:none!important}.meta{font-size:13px;color:var(--cinza)}.head-result{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:flex-start}.head-result h3{font-size:23px;line-height:1.25;margin:7px 0}.tag{border-radius:99px;background:#e6e9ff;color:#1711b9;padding:6px 10px;font-size:12px;font-weight:800;white-space:nowrap}.label-caps{font-size:12px;font-weight:800;color:var(--cinza);text-transform:uppercase;letter-spacing:.05em}.next{border-left:4px solid var(--verde);background:#f2fbf5;padding:14px 17px;margin:19px 0;border-radius:3px}.next p{margin:4px 0 0;color:var(--tinta)}.timeline{list-style:none;padding:0 0 0 12px;margin:19px 0 0;border-left:2px solid #c2c9df}.timeline li{position:relative;padding:0 0 23px 23px}.timeline li:before{content:'';position:absolute;top:4px;left:-19px;width:12px;height:12px;border-radius:50%;border:2px solid #fff;background:var(--azul)}.timeline li:last-child{padding-bottom:2px}.timeline b{display:block}.timeline time{font-size:12px;color:var(--cinza)}.timeline p{margin:2px 0;font-size:14px;color:#3a3e4d}
+.admin-list{display:grid;gap:8px;margin:16px 0}.admin-item{border:1px solid var(--borda);background:#fff;text-align:left;padding:12px;border-radius:6px}.admin-item:hover,.admin-item:focus{border-color:var(--azul)}.admin-item strong{display:block}.admin-item span{font-size:13px;color:var(--cinza)}.selected{background:#f1f3ff;border-color:var(--azul)}.footer{border-top:1px solid var(--borda);padding:26px 0;background:#f8f8fb;color:#484b5c;font-size:13px}.footer p{max-width:900px;margin:0}
+@media(max-width:780px){.steps{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}.hero{padding-top:40px}.surface{padding:20px}.back{font-size:12px}}@media(max-width:430px){.steps{grid-template-columns:1fr 1fr;gap:8px}.step{padding:12px}.header-inner{padding:10px 15px}.mark{font-size:27px}h2{font-size:34px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#principal">Pular para o conteúdo</a>
+<header class="header"><div class="header-inner"><a href="../" class="mark" aria-label="Página inicial de João Assink">A GENTE ACREDITA</a><a class="back" href="../#participacao">← Voltar à participação</a></div></header>
+<main id="principal">
+<div class="wrap">
+<section class="hero" aria-labelledby="tit"><span class="kicker">João Assink · Participação cidadã</span><h1 id="tit">A SUA IDEIA MERECE ACOMPANHAMENTO.</h1><p>Veja como uma sugestão pode ter registro, análise, encaminhamento e resposta. O cidadão acompanha cada etapa com seu protocolo e uma chave de acesso enviada ao seu e-mail.</p>
+<div class="notice" role="note"><span aria-hidden="true">ⓘ</span><div><strong>Protótipo público para testes — sem recebimento de sugestões reais.</strong>Os casos, códigos e alterações desta página são fictícios. A demonstração não possui sigilo real. Não digite dados pessoais, denúncias nem informações de saúde.</div></div></section>
+<section aria-label="Etapas do atendimento" class="steps"><div class="step"><b>01</b><span>Envio pelo Google Forms</span></div><div class="step"><b>02</b><span>Protocolo por e-mail</span></div><div class="step"><b>03</b><span>Análise e andamento</span></div><div class="step"><b>04</b><span>Resposta e conclusão</span></div></section>
+<div class="layout"><div class="surface">
+<div class="tabbar" role="tablist" aria-label="Escolha a área"><button class="tab" type="button" role="tab" id="tab-pessoa" aria-selected="true" aria-controls="area-pessoa">Sou cidadão</button><button class="tab" type="button" role="tab" id="tab-equipe" aria-selected="false" aria-controls="area-equipe">Painel da equipe (simulação)</button></div>
+<section id="area-pessoa" role="tabpanel" aria-labelledby="tab-pessoa">
+<h2>Consulte sua sugestão</h2><p>Na versão definitiva, cada envio terá um protocolo e uma chave secreta distintos. Nenhum deles ficará publicado nesta página.</p>
+<form id="form-consulta" autocomplete="off"><label for="numero">Número de protocolo</label><input class="field" id="numero" name="numero" required placeholder="Ex.: JA-2026-0001" maxlength="64" spellcheck="false"><label for="chave">Chave privada de acesso</label><input class="field" type="password" id="chave" name="chave" required maxlength="128" placeholder="Chave recebida por e-mail" autocomplete="off"><button class="primary" type="submit">Consultar andamento</button></form>
+<div class="demo-examples"><h3>Experimentar com dados fictícios</h3><div class="button-row"><button class="secondary" id="ex1" type="button">Exemplo 1 · Acessibilidade</button><button class="secondary" id="ex2" type="button">Exemplo 2 · Transporte</button></div><p class="tiny">Os botões preenchem automaticamente credenciais de demonstração, conhecidas publicamente.</p></div>
+<div class="feedback" id="consulta-mensagem" role="status" aria-live="polite"></div>
+<div id="consulta-resultado" class="result" hidden><div class="head-result"><div><div class="meta" id="res-num"></div><h3 id="res-titulo"></h3><div class="meta" id="res-data"></div></div><span class="tag" id="res-status"></span></div><div class="next"><span class="label-caps">Próximo passo previsto</span><p id="res-proximo"></p></div><h3>Histórico de movimentações</h3><ol class="timeline" id="res-timeline"></ol><p class="tiny">Acompanhamento simulado. Não corresponde a uma demanda recebida por João Assink ou por órgão público.</p><button type="button" class="secondary" id="sair">Encerrar visualização</button></div>
+</section>
+<section id="area-equipe" role="tabpanel" aria-labelledby="tab-equipe" hidden><h2>Gestão de protocolos</h2><p>Visualize como a equipe atualizaria os andamentos. As alterações deste protótipo ocorrem apenas nesta tela e desaparecem ao recarregar a página.</p>
+<div id="admin-intro" class="demo-examples"><strong>Área demonstrativa, não privada.</strong><p class="tiny">Quando o servidor for ativado, o painel administrativo exigirá autenticação no servidor e não utilizará senhas gravadas no código público.</p><button type="button" id="admin-demo" class="secondary">Abrir painel de demonstração</button></div>
+<div id="admin-area" hidden><h3>Solicitações de exemplo</h3><div id="admin-lista" class="admin-list"></div><form id="admin-form" hidden><div id="admin-escolhido" class="meta"></div><label for="admin-situacao">Situação atual</label><select class="field" id="admin-situacao"><option>Recebida</option><option>Em triagem</option><option>Em análise</option><option>Encaminhada</option><option>Aguardando retorno</option><option>Concluída</option><option>Não acolhida</option></select><label for="admin-nota">Atualização que o cidadão poderá ler</label><textarea class="field" id="admin-nota" rows="3" maxlength="600" required placeholder="Explique o que foi feito, em linguagem clara."></textarea><label for="admin-proximo">Próximo passo</label><input class="field" id="admin-proximo" maxlength="180" required placeholder="O que acontecerá agora?"><button class="primary" type="submit">Registrar atualização fictícia</button></form><div class="feedback" id="admin-mensagem" role="status" aria-live="polite"></div></div>
+</section>
+</div>
+<aside class="surface aside" aria-label="Informações de acesso"><h2>Privacidade em primeiro lugar</h2><p>Na implantação real, os dados ficam em um servidor protegido. O GitHub Pages hospeda apenas a interface.</p><ul><li>O protocolo identifica a solicitação, mas não libera seu conteúdo sozinho.</li><li>A chave de acesso é gerada de forma aleatória e enviada por e-mail ao solicitante.</li><li>A equipe acessa por autenticação administrativa separada.</li><li>O histórico deve mostrar apenas informações adequadas ao cidadão.</li><li>Dados de saúde, deficiência e denúncias exigem cuidados específicos de proteção.</li></ul><p><strong>Não é um canal oficial de atendimento, nem um serviço de urgência.</strong></p></aside>
+</div>
+</div>
+</main>
+<footer class="footer"><div class="wrap"><p>Página pessoal e independente de João Assink. Este ambiente é uma demonstração de interface e não recebe nem processa solicitações verdadeiras. Nenhum conteúdo desta página representa protocolo de órgão público.</p></div></footer>
+<script>
+'use strict';
+// O protótipo usa EXCLUSIVAMENTE casos fictícios. Jamais adicionar dados reais aqui.
+// A API privada deverá ser configurada antes de qualquer atendimento real.
+const API_BASE = '';
+const mocks = {
+ 'JA-2026-0001': { access:'ACESSO-DEMO-01',title:'Acessibilidade em espaços comunitários',status:'Em análise',date:'10/11/2026',next:'Identificar possibilidades de encaminhamento e informar a resposta ao cidadão.',events:[{status:'Recebida',date:'10/11/2026',note:'Sugestão registrada para demonstração.'},{status:'Em triagem',date:'10/11/2026',note:'Tema identificado como acessibilidade.'},{status:'Em análise',date:'10/11/2026',note:'Análise fictícia do pedido iniciada.'}]},
+ 'JA-2026-0002': { access:'ACESSO-DEMO-02',title:'Transporte para atividades educacionais',status:'Encaminhada',date:'10/11/2026',next:'Aguardar informações para elaborar uma devolutiva clara.',events:[{status:'Recebida',date:'10/11/2026',note:'Sugestão registrada para demonstração.'},{status:'Em triagem',date:'10/11/2026',note:'Assunto classificado como transporte.'},{status:'Encaminhada',date:'10/11/2026',note:'Encaminhamento fictício cadastrado no protótipo.'}]}
+};
+const get = id => document.getElementById(id);
+let active = null;
+function make(tag, text, classname){const el=document.createElement(tag);if(classname)el.className=classname;if(text!==undefined)el.textContent=text;return el;}
+function switchArea(area){
+ const citizen=area==='pessoa';
+ get('area-pessoa').hidden=!citizen;get('area-equipe').hidden=citizen;
+ get('tab-pessoa').setAttribute('aria-selected',String(citizen));get('tab-equipe').setAttribute('aria-selected',String(!citizen));
+ get(citizen?'tab-pessoa':'tab-equipe').focus();
+}
+get('tab-pessoa').addEventListener('click',()=>switchArea('pessoa'));
+get('tab-equipe').addEventListener('click',()=>switchArea('equipe'));
+function displayRecord(code,rec){
+ get('res-num').textContent='Protocolo '+code;get('res-titulo').textContent=rec.title;
+ get('res-data').textContent='Registrado em '+rec.date;get('res-status').textContent=rec.status;get('res-proximo').textContent=rec.next || 'Aguarde a próxima atualização.';
+ const list=get('res-timeline');list.replaceChildren();
+ (rec.events||[]).forEach(evt=>{const li=make('li');li.append(make('b',evt.status),make('time',evt.date),make('p',evt.note));list.append(li);});
+ get('consulta-resultado').hidden=false;
+}
+function feedback(id,text,isError){const el=get(id);el.textContent=text;el.className='feedback '+(isError?'error':'ok');}
+function fillSample(which){const id=which==='1'?'JA-2026-0001':'JA-2026-0002';get('numero').value=id;get('chave').value=mocks[id].access;get('consulta-resultado').hidden=true;feedback('consulta-mensagem','Exemplo carregado. Clique em Consultar andamento.',false);get('numero').focus();}
+get('ex1').addEventListener('click',()=>fillSample('1'));get('ex2').addEventListener('click',()=>fillSample('2'));
+get('form-consulta').addEventListener('submit', async ev=>{
+ ev.preventDefault();get('consulta-resultado').hidden=true;
+ const code=get('numero').value.trim().toUpperCase();const key=get('chave').value.trim();
+ if(mocks[code] && key===mocks[code].access){displayRecord(code,mocks[code]);feedback('consulta-mensagem','Demonstração carregada com sucesso.',false);get('consulta-resultado').scrollIntoView({block:'nearest'});return;}
+ if(!API_BASE){feedback('consulta-mensagem','Este é um protótipo. Use um dos exemplos acima; protocolos reais ainda não estão ativados.',true);return;}
+ try{
+ const res=await fetch(API_BASE+'/api/consultar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({protocol:code,access_key:key}),cache:'no-store'});
+ if(!res.ok)throw Error('Não foi possível validar essas credenciais.');
+ const record=await res.json();displayRecord(code,record);feedback('consulta-mensagem','Consulta realizada.',false);
+ }catch(err){feedback('consulta-mensagem','Protocolo ou chave inválidos, ou serviço temporariamente indisponível.',true);}
+});
+get('sair').addEventListener('click',()=>{get('consulta-resultado').hidden=true;get('chave').value='';get('numero').focus();feedback('consulta-mensagem','Visualização encerrada.',false);});
+get('admin-demo').addEventListener('click',()=>{get('admin-area').hidden=false;get('admin-intro').hidden=true;drawList();});
+function drawList(){const list=get('admin-lista');list.replaceChildren();Object.keys(mocks).forEach(code=>{const b=make('button',undefined,'admin-item'+(active===code?' selected':''));b.type='button';b.append(make('strong',code+' · '+mocks[code].title),make('span',mocks[code].status));b.addEventListener('click',()=>selectRecord(code));list.append(b);});}
+function selectRecord(code){active=code;drawList();get('admin-form').hidden=false;get('admin-escolhido').textContent=code+' · '+mocks[code].title;get('admin-situacao').value=['Recebida','Em triagem','Em análise','Encaminhada','Aguardando retorno','Concluída','Não acolhida'].includes(mocks[code].status)?mocks[code].status:'Em análise';get('admin-nota').value='';get('admin-proximo').value=mocks[code].next;get('admin-situacao').focus();}
+get('admin-form').addEventListener('submit',ev=>{ev.preventDefault();if(!active)return;const r=mocks[active];r.status=get('admin-situacao').value;r.next=get('admin-proximo').value.trim();r.events.push({status:r.status,date:new Intl.DateTimeFormat('pt-BR').format(new Date()),note:get('admin-nota').value.trim()});drawList();get('admin-nota').value='';feedback('admin-mensagem','Atualização fictícia salva apenas nesta sessão. Volte à consulta para visualizar.',false);});
+</script>
+</body></html>
