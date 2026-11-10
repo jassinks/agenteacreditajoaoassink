@@ -1,0 +1,18 @@
+# MODELO: crie sua configuração de implantação PRIVADA a partir deste arquivo.
+# Use um banco D1 NOVO; nunca reutilize o banco FRESUNI.
+name = "joao-assink-protocolos"
+main = "worker.js"
+compatibility_date = "2026-11-10"
+workers_dev = true
+
+[vars]
+SITE_ORIGIN = "https://jassinks.github.io"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "joao_assink_protocolos"
+database_id = "SUBSTITUA_PELO_ID_REAL_D1"
+
+# ATENÇÃO: INGEST_TOKEN, ADMIN_TOKEN, ACCESS_PEPPER e TURNSTILE_SECRET
+# são secrets privados do Cloudflare Worker.
+# NUNCA os inclua neste arquivo, no GitHub ou no config.js do site.
